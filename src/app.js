@@ -11,3 +11,13 @@ import { convertDate } from "./utils";
 //   .then(rsp => rsp.json())
 //   .then(data => console.log(data))
 //   .catch(error => console.log('error', error));
+
+//*******target elements*******
+
+const subheader = document.getElementById('subheader');
+const forecastContainer = document.getElementById('forecast-container');
+
+const BASEURL = 'https://se-weather-api.herokuapp.com/api/v1/';
+const geoEndPoint = 'geo';
+const forecastEndPoint = 'forecast';
+
