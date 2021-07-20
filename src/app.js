@@ -19,7 +19,11 @@ function getForecastData(geoData) {
 
     fetch(`${BASEURL}${forecastEndPoint}?latitude=${geoData.latitude}&longitude=${geoData.longitutde}&date=${date}`)
         .then(rsp => rsp.json())
-        .then(data => console.log(data)) //PLACEHOLDER
+        .then(data => {
+            console.log(data);
+            updateSubheader(geoData);
+            createForecastCards(data);
+        })
         .catch(error => console.log('error', error));
 }
 
@@ -31,7 +35,6 @@ function getGeoData(zip = '10128') {
         .then(data => getForecastData(data))
         .catch(error => console.log('error', error));
 }
-
 
 // date functions
 function getCurrentDate() {
@@ -48,12 +51,34 @@ function formatDate(date) {
     const month = date.getMonth() + 1;
     const day = date.getDate();
 
-    console.log(`${month}/${day}/${year}`);
-
     return `${month}/${day}/${year}`;
 }
 
+// page manipulation functions
+function updateSubheader(geoData) {
+    subheader.innerHTML = `Weather Forecast For ${geoData.city}`;
+}
 
+function createForecastCards(forecastData) {
+    console.log(forecastData.daily.data);
+
+    for (let i = 0; i < 3; i++) {
+        //create card structure
+        const forecastCard = document.createElement('div');
+        forecastCard.className = "forecast-card";
+        const cardHeader = document.createElement('div');
+        cardHeader.className = "card-header";
+        const cardContents = document.createElement('div');
+        cardContents.className = "card-contents";
+        forecastCard.append(cardHeader, cardContents);
+
+        //update contents
+        forecastContainer.append(forecastCard);
+    }
+}
+
+
+// init
 function init() {
     console.log("initializing");
     getGeoData();
