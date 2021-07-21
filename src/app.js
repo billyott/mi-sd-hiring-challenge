@@ -103,8 +103,6 @@ function createForecastCards(forecastData) {
             </div>
         `
 
-
-
         forecastContainer.append(forecastCard);
     }
 }
