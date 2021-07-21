@@ -9,6 +9,17 @@ const BASEURL = 'https://se-weather-api.herokuapp.com/api/v1/';
 const geoEndPoint = 'geo';
 const forecastEndPoint = 'forecast';
 
+//bring in imgs - setting path not working, suspect issue with parcel?
+const cloudyImg = require('../img/cloudy.png');
+const rainImg = require('../img/rain.png');
+const snowImg = require('../img/snow.png');
+const sunnyImg = require('../img/sunny.png');
+const imgs = {
+    cloudy: cloudyImg,
+    rain: rainImg,
+    snow: snowImg,
+    sunny: sunnyImg
+}
 
 //*******functions*******
 
@@ -82,7 +93,7 @@ function createForecastCards(forecastData) {
 
         //update contents
         cardContents.innerHTML = `
-            <img class="icon" src="img/${icon}.png"></img>
+            <img class="icon" src="${imgs[icon]}"></img>
             <div>
                 <div class="weather">${icon}</div>
                 <div class="temp">
