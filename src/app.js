@@ -41,7 +41,7 @@ function getCurrentDate() {
     return new Date();
 } 
 
-function getWeekDay(date) {
+function getDayOfWeek(date) {
     const days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
     return days[date.getDay()]
 }
@@ -60,9 +60,14 @@ function updateSubheader(geoData) {
 }
 
 function createForecastCards(forecastData) {
-    console.log(forecastData.daily.data);
 
     for (let i = 0; i < 3; i++) {
+
+        const dayOfWeek = i === 0 ? 'Today' : getDayOfWeek(new Date(convertDate(forecastData.daily.data[i].time)));
+        const icon = forecastData.daily.data[i].icon;
+        const highTemp = Math.round(forecastData.daily.data[i].temperatureHigh);
+        const lowTemp = Math.round(forecastData.daily.data[i].temperatureLow);
+
         //create card structure
         const forecastCard = document.createElement('div');
         forecastCard.className = "forecast-card";
@@ -72,7 +77,23 @@ function createForecastCards(forecastData) {
         cardContents.className = "card-contents";
         forecastCard.append(cardHeader, cardContents);
 
+        //update header
+        cardHeader.innerHTML = `${dayOfWeek}:`;
+
         //update contents
+        cardContents.innerHTML = `
+            <img class="icon" src="img/${icon}.png"></img>
+            <div>
+                <div class="weather">${icon}</div>
+                <div class="temp">
+                    <span class="high-temp">${highTemp}</span>° /
+                    <span class="high-temp">${lowTemp}</span>° F
+                </div>
+            </div>
+        `
+
+
+
         forecastContainer.append(forecastCard);
     }
 }
