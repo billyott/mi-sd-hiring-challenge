@@ -94,11 +94,11 @@ function createForecastCards(forecastData) {
         //update contents
         cardContents.innerHTML = `
             <img class="icon" src="${imgs[icon]}"></img>
-            <div>
+            <div class="content-info">
                 <div class="weather">${icon}</div>
                 <div class="temp">
                     <span class="high-temp">${highTemp}</span>° /
-                    <span class="high-temp">${lowTemp}</span>° F
+                    <span class="low-temp">${lowTemp}</span>° F
                 </div>
             </div>
         `
